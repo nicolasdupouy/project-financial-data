@@ -1,0 +1,38 @@
+
+  <div>
+    <h1>{{title}}</h1>
+    <label>Price time</label>
+    <select id="price-time">
+        <option value="4. close" selected>Close</option>
+        <option value="1. open">Open</option>
+        <option value="2. high">High</option>
+        <option value="3. low">Low</option>
+    </select>  
+    {{!-- <canvas id="myChart"></canvas> --}}
+    <div id="myChart"></div>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script type="text/javascript"  src="http://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    {{!-- <script type="text/javascript" src="https://code.highcharts.com/highcharts.js"></script>
+    <script type="text/javascript"  src="http://code.highcharts.com/stock/highstock.js"></script>
+    <script type="text/javascript" src="http://code.highcharts.com/stock/modules/exporting.js"></script>
+    <script type="text/javascript" src="http://code.highcharts.com/modules/exporting.js"></script> --}}
+    {{!-- <script type='text/javascript' src="Highcharts/code/highstock.js"></script>
+    <script type='text/javascript' src="../Highcharts/code/modules/exporting.js"></script>
+    <script type='text/javascript' src="../Highcharts/code/modules/export-data.js"></script> --}}
+    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
+  
+{{!-- <script src="../../code/highstock.js"></script>
+<script src="../../code/modules/exporting.js"></script>
+<script src="../../code/modules/export-data.js"></script> --}}
+{{!-- <script src="../Highcharts/code/highstock.js"></script>
+<script src="../Highcharts/code/modules/exporting.js"></script>
+<script src="../Highcharts/code/modules/export-data.js"></script> --}}
+
+  <script src="javascripts/data-axios-script.js" charset="utf-8"></script>
+  
+</div>
+
