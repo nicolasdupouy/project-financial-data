@@ -1,14 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const Indice = require('../models/indice.js');
-const Highcharts=require('highcharts/highstock');
+// const Highcharts=require('highcharts/highstock');
 
 /* GET home page */
 router.get('/', (req, res, next) => {
   res.render('index');
 });
 
-router.get('/indice', (req, res, next) => {
+router.get('/chart', (req, res, next) => {
   // Indice.findOne({"_id":"5bad2582ded6ca2c4021b221"})
   Indice.find()
     .then(indices => {
@@ -30,59 +30,42 @@ router.get('/indice', (req, res, next) => {
         })
       }
       // console.log("dictionnaire", dictIndice)
-      res.render('indice', { dictIndice })
+      res.render('chart', { dictIndice })
     })
 });
 
 
-router.get('/indice/:id',(req,res,next)=>{
-
+router.get('/api/indice/:id', (req, res, next) => {
   // document.getElementById('start').onchange = function(e) {
   //   console.log(e);
   //   start = e.target.value;
   //   getGraph(start,end,ccy)
   // }
-  let indiceCode=req.params.id
-  console.log("code",indiceCode)
-  Indice.find({'Symbol': indiceCode})
+  let indiceCode = req.params.id
+  console.log("code", indiceCode)
+  Indice.find({ 'Symbol': indiceCode })
     .then(data => {
-      let dataChart=[]
+      let dataChart = []
+      // let monthstring=['JANUARY','FEBRUARY','MARCH','APRIL','MAY','JUNE','JULY','AUGUST','SEPTEMBER','OCTOBER','NOVEMBER','DECEMBER']
+      // let monthnumber=[1,2,3,4,5,6,7,8,9,10,11,12]
+      // monthnumber.push(i for (i=1;i<=12;i++))
+      // let months=[[]]
+      // let dictMonth={
+      //   monthstring:monthnumber
+      // }
       for (ind = 0; ind < data.length; ind++) {
-        dataChart.push([data[ind].MONTH,data[ind]["Total Volume"]])
+        // dataChart.push([monthstring.findIndex(data[ind].MONTH)+' '+data[ind].YEAR, data[ind]["Total Volume"]])
+        dataChart.push([Date.parse(data[ind].MONTH+' '+data[ind].YEAR), data[ind]["Total Volume"]])
+      
       }
-      console.log(typeof(dataChart),dataChart.sort())
-      // months=data.MONTH
-      // volume=data["Total Volume"]
-      // console.log(months,volume)
-
-      var config= {
-        rangeSelector: {
-            selected: 1
-        },
-        series: [{
-            name: data.Symbol,
-            data:dataChart,
-            tooltip: {
-              valueDecimals: 2
-          }
-        }],
-        // xAxis:{
-        // 	categories:labelData
-        // },
-        title: {
-          text: 'MSFT Evolution'
-      },
-              
-    };
-    
-    
-    let secondchart= new Highcharts.stockChart('myChart', config)
-      res.render('chart',{data,secondchart})
+      console.log('sorted datachart',dataChart.sort())
+      res.json({dataChart})
     })
-    .catch(error => {
-      console.log(error)
-    })
-  
 })
+
+router.get('/chart', (req, res, next) => {
+  res.render('chart')
+})
+
 
 module.exports = router;

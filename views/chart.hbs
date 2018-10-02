@@ -1,5 +1,17 @@
-<p>{{data}}</p>
+{{!-- <p>{{data}}</p> --}}
+  <h1>INDICE NAME</h1>
+<select id="udl-selected" >
+{{#each dictIndice}}
+  <option value="{{this.key}}">{{this.key}}</option>
+{{/each}}
+</select>
+{{!-- {{#each dictIndice}}
+<p id="udl-selected"><a href="indice/{{this.key}}">{{this.key}}</a></p>
+{{/each}} --}}
+
+<p>Hello</p>
 <div id="myChart"></div>
+<div id="myChart2"></div>
   
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
@@ -15,3 +27,6 @@
     <script type='text/javascript' src="../Highcharts/code/modules/export-data.js"></script> --}}
     <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
 
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
+<script src="javascripts/data-axios-script.js" charset="utf-8"></script>
