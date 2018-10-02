@@ -1,8 +1,21 @@
-<h1>INDICE NAME</h1>
-<select>
+
+  <h1>INDICE NAME</h1>
+{{!-- <select>
+{{#each dictIndice}}
+  <option value="{{this.key}}"  >{{this.key}}</option>
+{{/each}}
+</select> --}}
+{{#each dictIndice}}
+<p><a href="indice/{{this.key}}">{{this.key}}</a></p>
+{{/each}}
+
+
+
+
+{{!-- <select>
  {{!-- <p>{{unqiuelistUdl}}</p> --}}
-{{#each indiceCode}}
+{{!-- {{#each indiceName}}
   <option value="{{this}}">{{this}}</option>
 {{/each}}
 
-</select>
+</select> --}}
