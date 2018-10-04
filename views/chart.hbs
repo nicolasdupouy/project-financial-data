@@ -7,6 +7,13 @@
         {{/each}}
     </select>
     <div id="udl-description"></div>
+    {{!-- <input type="range" multiple value="0,100" /> --}}
+<span class="multi-range">
+    <label id="start-date"></label>
+    <input type="range" min="0" max="100" value="5" id="lower">
+    <input type="range" min="0" max="100" value="95" id="upper">
+    <label id="end-date"></label>
+</span>
 </nav>
 {{!-- <div></div> --}}
 <div id="myChartPrice" class="chart"></div>
