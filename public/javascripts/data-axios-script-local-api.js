@@ -44,9 +44,9 @@ let getMillisectoDate = function (myDate) {
 	return [datemillisec, finalDate];
 }
 
-let updateGraphs=function(udl,startDateMillisec,endDateMillisec){
-	getGraphPrice(udl, startDateMillisec,endDateMillisec)
-	getGraphTotalVolume(udl, startDateMillisec,endDateMillisec)
+let updateGraphs = function (udl, startDateMillisec, endDateMillisec) {
+	getGraphPrice(udl, startDateMillisec, endDateMillisec)
+	getGraphTotalVolume(udl, startDateMillisec, endDateMillisec)
 	getGraphADV(udl, startDateMillisec, endDateMillisec)
 }
 
@@ -118,6 +118,28 @@ let getDescription = function (udl) {
 		})
 }
 
+let getGlobalVolume = function (udl) {
+	axios.get(`/api/globalview/${udl}`)
+		.then(response => {
+			// var result = _.sortBy(Object.values(response.data), o => o[0])
+			// console.log(result)
+			var result = Object.values(response.data)
+			console.log('res TotalVolume.totalData', Object.keys(result[0]))
+			document.getElementById('mytable-volume').innerHTML = Object.keys(result[0])
+			let lentable = Object.keys(result[0]).length
+			let keystable = Object.keys(result[0])
+			let valuestable = Object.values(result[0])
+			document.getElementById('mytable-volume').innerHTML += "<table id='mytable-vol'></table>"
+			for (i = 0; i < lentable; i++) {
+				document.getElementById('mytable-vol').innerHTML += `<thead><tr><th>${keystable[i]}</th></tr></thead>`
+				document.getElementById('mytable-vol').innerHTML += `<tr><td>${valuestable[i]}</td></tr>`
+			}
+
+			$('#mytable-vol').DataTable();
+
+		})
+}
+
 document.getElementById("lower").onchange = function (e) {
 	let startDateMillisec = getMillisectoDate(e.target.value)[0]
 	let startDate = getMillisectoDate(e.target.value)[1]
@@ -148,4 +170,5 @@ document.getElementById("udl-selected").onchange = function (e) {
 	getGraphPrice(udl)
 	getGraphTotalVolume(udl)
 	getGraphADV(udl)
+	getGlobalVolume(udl)
 }

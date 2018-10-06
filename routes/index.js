@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Indice = require('../models/indice.js');
+const GlobalVolume = require('../models/variation.js');
+
 // const Highcharts=require('highcharts/highstock');
 
 /* GET home page */
@@ -55,7 +57,8 @@ router.get('/api/totalvolume/:id', (req, res, next) => {
         dataChart.push([Date.parse(data[ind].MONTH + ' ' + data[ind].YEAR), data[ind]["Total Volume"]])
 
       }
-      console.log('sorted datachart', dataChart.sort())
+      // console.log('sorted datachart', dataChart.sort())
+      dataChart.sort()
       res.json({ dataChart })
     })
 })
@@ -87,6 +90,17 @@ router.get('/api/udl/desc/:id', (req, res, next) => {
     .then(data => {
       indiceName = data.Product
       res.json({ indiceName })
+    })
+})
+
+router.get('/api/globalview/:id', (req, res, next) => {
+  let udlCode = req.params.id
+  console.log("code", udlCode)
+  GlobalVolume.findOne({ 'Symbol': udlCode})
+    .then(data => {
+      totalData = data
+      console.log("index.js GlobalVolume", totalData)
+      res.json({ totalData })
     })
 })
 
