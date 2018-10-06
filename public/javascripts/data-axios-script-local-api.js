@@ -78,7 +78,7 @@ let getGraphPrice = function (udl, startDate, endDate) {
 
 let getGraphTotalVolume = function (udl, startDate, endDate) {
 	// console.log("udl", udl)
-	axios.get(`http://localhost:3000/api/totalvolume/${udl}`)
+	axios.get(`/api/totalvolume/${udl}`)
 		.then(response => {
 			// var result = _.sortBy(Object.values(response.data), o => o[0])
 			// console.log(result)
@@ -93,7 +93,7 @@ let getGraphTotalVolume = function (udl, startDate, endDate) {
 }
 
 let getGraphADV = function (udl, startDate, endDate) {
-	axios.get(`http://localhost:3000/api/adv/${udl}`)
+	axios.get(`/api/adv/${udl}`)
 		.then(response => {
 			// var result = _.sortBy(Object.values(response.data), o => o[0])
 			// console.log(result)
@@ -109,7 +109,7 @@ let getGraphADV = function (udl, startDate, endDate) {
 }
 
 let getDescription = function (udl) {
-	axios.get(`http://localhost:3000/api/udl/desc/${udl}`)
+	axios.get(`/api/udl/desc/${udl}`)
 		.then(response => {
 			// var result = _.sortBy(Object.values(response.data), o => o[0])
 			// console.log(result)
