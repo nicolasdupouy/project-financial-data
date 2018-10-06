@@ -21,7 +21,7 @@ const path         = require('path');
 const dbName= 'financial-data'
 
 mongoose
-  .connect(`mongodb://localhost/${dbName}`, {useNewUrlParser: true})
+  .connect(process.env.MONGODB_URI ||`mongodb://localhost/${dbName}`, {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
