@@ -130,11 +130,18 @@ let getGlobalVolume = function (udl) {
 			let keystable = Object.keys(result[0])
 			let valuestable = Object.values(result[0])
 			document.getElementById('mytable-volume').innerHTML += "<table id='mytable-vol'></table>"
+			// document.getElementById('mytable-volume').innerHTML += "<thead id='mytable-vol-head'></thead>"
+			// document.getElementById('mytable-volume').innerHTML += "<tbody id='mytable-vol-body'></tbody>"
+			let headertable="";
+			let bodytable="";
 			for (i = 0; i < lentable; i++) {
-				document.getElementById('mytable-vol').innerHTML += `<thead><tr><th>${keystable[i]}</th></tr></thead>`
-				document.getElementById('mytable-vol').innerHTML += `<tr><td>${valuestable[i]}</td></tr>`
+				headertable += `<th>${keystable[i]}</th>`
+				bodytable+= `<td>${parseFloat(valuestable[i]).toLocaleString(undefined, { minimumFractionDigits: 0 })}</td>`
+				// document.getElementById('mytable-vol-body').innerHTML += `<td>${parseFloat(valuestable[i]).toLocaleString(undefined, { minimumFractionDigits: 0 })}</td>`
 			}
-
+			document.getElementById('mytable-vol').innerHTML+="<thead id='mytable-vol-head'>"+headertable+"</thead><tbody>"+bodytable+"</tbody>"
+			// document.getElementById('mytable-vol-head').innerHTML +=headertable
+			// document.getElementById('mytable-vol-body').innerHTML+=bodytable
 			$('#mytable-vol').DataTable();
 
 		})
