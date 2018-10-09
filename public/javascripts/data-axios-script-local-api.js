@@ -45,7 +45,7 @@ let getMillisectoDate = function (myDate) {
 }
 
 let updateGraphs = function (udl, startDateMillisec, endDateMillisec) {
-	getGraphPrice(udl, startDateMillisec, endDateMillisec)
+	// getGraphPrice(udl, startDateMillisec, endDateMillisec)
 	getGraphTotalVolume(udl, startDateMillisec, endDateMillisec)
 	getGraphADV(udl, startDateMillisec, endDateMillisec)
 }
@@ -83,6 +83,7 @@ let getGraphTotalVolume = function (udl, startDate, endDate) {
 			// var result = _.sortBy(Object.values(response.data), o => o[0])
 			// console.log(result)
 			var result = Object.values(response.data)
+			console.log('result details to use:', result)
 			let dateRange = getDatesRange(result[0], startDate, endDate)
 			startDate = dateRange[0]
 			endDate = dateRange[1]
@@ -131,22 +132,73 @@ let getDataTableVolume = function (udl) {
 			let valuestable = Object.values(result[0]).reverse()
 			$("#mytable-volume").html("")
 			// document.getElementById('mytable-volume').innerHTML = "";
-			document.getElementById('mytable-volume').innerHTML +="<h2>GLOBAL VOLUME PER YEAR</h2>"
+			document.getElementById('mytable-volume').innerHTML += "<h2>GLOBAL VOLUME PER YEAR</h2>"
 			document.getElementById('mytable-volume').innerHTML += "<table id='mytable-vol'></table>"
 			// document.getElementById('mytable-volume').innerHTML += "<thead id='mytable-vol-head'></thead>"
 			// document.getElementById('mytable-volume').innerHTML += "<tbody id='mytable-vol-body'></tbody>"
-			let headertable="";
-			let bodytable="";
+			let headertable = "";
+			let bodytable = "";
 			for (i = 0; i < lentable; i++) {
-				headertable += `<th>${keystable[i]}</th>`
-				bodytable+= `<td>${parseFloat(valuestable[i]).toLocaleString(undefined, { minimumFractionDigits: 0 })}</td>`
-				// document.getElementById('mytable-vol-body').innerHTML += `<td>${parseFloat(valuestable[i]).toLocaleString(undefined, { minimumFractionDigits: 0 })}</td>`
+				if (keystable[i] != "_id") {
+					console.log("Name in Symbol", valuestable[i])
+					headertable += `<th>${keystable[i]}</th>`
+					if (keystable[i] != "Symbol") {
+						if (valuestable[i] > 1000000) {
+							bodytable += `<td class="active">${parseFloat(valuestable[i]).toLocaleString(undefined, { minimumFractionDigits: 0 })}</td>`
+						} else {
+							bodytable += `<td>${parseFloat(valuestable[i]).toLocaleString(undefined, { minimumFractionDigits: 0 })}</td>`
+
+						}
+					} else {
+						bodytable += `<td>${valuestable[i]}</td>`
+					}
+
+					// document.getElementById('mytable-vol-body').innerHTML += `<td>${parseFloat(valuestable[i]).toLocaleString(undefined, { minimumFractionDigits: 0 })}</td>`
+				}
 			}
-			document.getElementById('mytable-vol').innerHTML+="<thead id='mytable-vol-head'>"+headertable+"</thead><tbody>"+bodytable+"</tbody>"
+
+			document.getElementById('mytable-vol').innerHTML += "<thead id='mytable-vol-head'>" + headertable + "</thead><tbody>" + bodytable + "</tbody>"
 			// document.getElementById('mytable-vol-head').innerHTML +=headertable
 			// document.getElementById('mytable-vol-body').innerHTML+=bodytable
 			$('#mytable-vol').DataTable();
 
+		})
+}
+
+let getDataTableVolumeMonth = function (udl) {
+	axios.get(`/api/volumemonth/${udl}`)
+		.then(response => {
+			// var result = _.sortBy(Object.values(response.data), o => o[0])
+			// console.log(result)
+			var result = Object.values(response.data)
+			let valuestable = Object.values(result[0])
+			let lentable = Object.keys(result[0]).length
+			console.log('values', valuestable)
+			$("#mytable-volume-details").html("")
+			// document.getElementById('mytable-volume').innerHTML = "";
+			document.getElementById('mytable-volume-details').innerHTML += "<h2>VOLUME DETAILS</h2>"
+			document.getElementById('mytable-volume-details').innerHTML += "<table id='mytable-vol-detail'></table>"
+			document.getElementById('mytable-vol-detail').innerHTML += "<thead id='mytable-vol-det-head'><th>NAME</th><th>MONTH</th><th>YEAR</th><th>VOLUME</th></thead>"
+			let bodytable = "";
+			let bodydetails = "";
+			for (i = 0; i < lentable; i++) {
+				for (j = 0; j < 4; j++) {
+					if (j == 3) {
+						if (valuestable[i][j] >= 150000) {
+							bodydetails += `<td class="active">${parseFloat(valuestable[i][j]).toLocaleString(undefined, { minimumFractionDigits: 0 })}</td>`
+						} else {
+							bodydetails += `<td>${parseFloat(valuestable[i][j]).toLocaleString(undefined, { minimumFractionDigits: 0 })}</td>`
+						}
+					} else {
+						bodydetails += `<td>${valuestable[i][j]}</td>`
+					}
+				}
+				bodytable += `<tr>${bodydetails}</tr>`
+				bodydetails = ""
+			}
+			document.getElementById('mytable-vol-detail').innerHTML += "<tbody>" + bodytable + "</tbody>"
+			// document.getElementsByClassName('active').style.color="red"
+			$('#mytable-vol-detail').DataTable();
 		})
 }
 
@@ -170,15 +222,21 @@ document.getElementById("upper").onchange = function (e) {
 
 document.getElementById("udl-selected").onchange = function (e) {
 	udl = e.target.value;
-	startDate = document.getElementById("start-date").innerHTML
+	// startDate = document.getElementById("start-date").innerHTML
 	// console.log('startDate en udl-selected',startDate)
-	endDate = document.getElementById("end-date").innerHTML
+	// endDate = document.getElementById("end-date").innerHTML
+
+	let startDateMillisec = getDatetoMillisec("start-date")
+	let endDateMillisec = getDatetoMillisec("end-date")
 	// console.log('endDate en udl-selected',endDate)
 	// console.log(udl)
 	// window.location
 	getDescription(udl)
-	getGraphPrice(udl)
-	getGraphTotalVolume(udl)
-	getGraphADV(udl)
+	updateGraphs(udl, startDateMillisec, endDateMillisec)
+	// // getGraphPrice(udl)
+	// getGraphTotalVolume(udl)
+	// getGraphADV(udl)
 	getDataTableVolume(udl)
+	getDataTableVolumeMonth(udl)
+
 }

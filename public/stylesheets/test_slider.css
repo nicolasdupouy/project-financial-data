@@ -12,12 +12,12 @@
     padding: 0 2px;
     /* Add some L/R padding to ensure box shadow of handle is shown */
     overflow: hidden;
-    border: 0;
-    border-radius: 1px;
+    border: 0px;
+    border-radius: 10px;
     outline: none;
-    background: linear-gradient(grey, grey) no-repeat center;
+    background: linear-gradient(rgb(58, 106, 149), rgb(58, 106, 149)) no-repeat center;
     /* Use a linear gradient to generate only the 2px height background */
-    background-size: 100% 2px;
+    background-size: 100% 5px;
     pointer-events: none;
   }
   input[type=range]:active,
@@ -28,7 +28,7 @@
     height: 28px;
     width: 28px;
     border-radius: 28px;
-    background-color: rgb(31, 207, 154);
+    background-color: rgb(58, 106, 149);
     z-index: 1000;
     position: relative;
     margin: 5px 0;

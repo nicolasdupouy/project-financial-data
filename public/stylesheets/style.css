@@ -1,40 +1,60 @@
 body {
-  padding: 50px;
+  padding: 30px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  padding-left: 130px;
   /* margin-top: 40px; */
-  /* text-align: center; */ }
+  /* text-align: center; */
+  color: #7b7171; }
 
 /* .udl-desc {
   text-align: left;
 } */
+h1 {
+  text-align: center;
+  margin-bottom: 40px; }
+
+.udl-desc {
+  height: 40px;
+  border-bottom: 1px #e8dbdb solid; }
+
 .udl-desc select, .udl-desc div {
   display: inline-flex;
   flex-direction: row;
   justify-content: center;
-  margin-right: 40px;
   /* background-color: red; */
   font-size: 1.2em; }
 
 .udl-desc div {
   background-color: white; }
 
+.label-name {
+  margin-right: 7px;
+  font-size: 1.2em;
+  font-style: italic; }
+
+#udl-selected {
+  color: #509cde; }
+
 a {
   color: #00B7FF; }
 
 /*# sourceMappingURL=style.css.map */
 #udl-description {
-  color: #52a352;
-  font-style: oblique; }
+  color: #509cde;
+  font-style: oblique;
+  font-size: 15px; }
+
+.udl-long-name {
+  margin-left: 20px;
+  margin-right: 15px; }
 
 #start-date {
   margin-right: 10px; }
 
 #end-date {
-  margin-left: 300px; }
+  margin-left: 270px; }
 
 #start-date, #end-date {
-  color: #131318;
+  color: #509cde;
   font-style: italic; }
 
 .chart {
@@ -46,9 +66,26 @@ a {
 
 #all-chart {
   display: flex;
-  flex-flow: row wrap; }
+  flex-flow: row wrap;
+  margin-top: 50px; }
 
-#mytable-volume {
-  font-size: 10px; }
+#mytable-volume, #mytable-volume-details {
+  font-size: 12px;
+  border: solid 1px #e8dbdb;
+  border-radius: 5px;
+  margin: 5px; }
+
+.multi-range {
+  margin-right: 0px; }
+
+h2 {
+  color: #7b7171; }
+
+thead {
+  color: #c15050; }
+
+.active {
+  color: red;
+  font-weight: bold; }
 
 /*# sourceMappingURL=style.css.map */

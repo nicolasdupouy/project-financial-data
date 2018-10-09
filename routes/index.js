@@ -55,7 +55,6 @@ router.get('/api/totalvolume/:id', (req, res, next) => {
       for (ind = 0; ind < data.length; ind++) {
         // dataChart.push([monthstring.findIndex(data[ind].MONTH)+' '+data[ind].YEAR, data[ind]["Total Volume"]])
         dataChart.push([Date.parse(data[ind].MONTH + ' ' + data[ind].YEAR), data[ind]["Total Volume"]])
-
       }
       // console.log('sorted datachart', dataChart.sort())
       dataChart.sort()
@@ -101,6 +100,22 @@ router.get('/api/globalview/:id', (req, res, next) => {
       totalData = data
       console.log("index.js GlobalVolume", totalData)
       res.json({ totalData })
+    })
+})
+
+router.get('/api/volumemonth/:id', (req, res, next) => {
+  let indiceCode = req.params.id
+  console.log("code", indiceCode)
+  Indice.find({ 'Symbol': indiceCode })
+    .then(data => {
+      let dataChart = []
+      for (ind = 0; ind < data.length; ind++) {
+        // dataChart.push([monthstring.findIndex(data[ind].MONTH)+' '+data[ind].YEAR, data[ind]["Total Volume"]])
+        dataChart.push([data[ind].Symbol,data[ind].MONTH,data[ind].YEAR, data[ind]["Total Volume"]])
+      }
+      // // console.log('sorted datachart', dataChart.sort())
+      // dataChart.sort()
+      res.json({ dataChart })
     })
 })
 
