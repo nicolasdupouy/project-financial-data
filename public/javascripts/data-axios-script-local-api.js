@@ -118,17 +118,20 @@ let getDescription = function (udl) {
 		})
 }
 
-let getGlobalVolume = function (udl) {
+let getDataTableVolume = function (udl) {
 	axios.get(`/api/globalview/${udl}`)
 		.then(response => {
 			// var result = _.sortBy(Object.values(response.data), o => o[0])
 			// console.log(result)
 			var result = Object.values(response.data)
-			console.log('res TotalVolume.totalData', Object.keys(result[0]))
-			document.getElementById('mytable-volume').innerHTML = Object.keys(result[0])
+			// console.log('res TotalVolume.totalData', Object.keys(result[0]))
+			// document.getElementById('mytable-volume').innerHTML = Object.keys(result[0])
 			let lentable = Object.keys(result[0]).length
-			let keystable = Object.keys(result[0])
-			let valuestable = Object.values(result[0])
+			let keystable = Object.keys(result[0]).reverse()
+			let valuestable = Object.values(result[0]).reverse()
+			$("#mytable-volume").html("")
+			// document.getElementById('mytable-volume').innerHTML = "";
+			document.getElementById('mytable-volume').innerHTML +="<h2>GLOBAL VOLUME PER YEAR</h2>"
 			document.getElementById('mytable-volume').innerHTML += "<table id='mytable-vol'></table>"
 			// document.getElementById('mytable-volume').innerHTML += "<thead id='mytable-vol-head'></thead>"
 			// document.getElementById('mytable-volume').innerHTML += "<tbody id='mytable-vol-body'></tbody>"
@@ -177,5 +180,5 @@ document.getElementById("udl-selected").onchange = function (e) {
 	getGraphPrice(udl)
 	getGraphTotalVolume(udl)
 	getGraphADV(udl)
-	getGlobalVolume(udl)
+	getDataTableVolume(udl)
 }

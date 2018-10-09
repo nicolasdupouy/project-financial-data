@@ -35,15 +35,7 @@ a {
 
 }
 
-.chart {
-  width: 45%;
-  display: inline-flex;
-  flex-direction: row;
-  justify-content: center;
-  background-color: yellow;
-  text-align:center;
-  border: solid 1px red;
-}
+
 
 #start-date{
   margin-right: 10px;
@@ -52,9 +44,38 @@ a {
   margin-left: 300px;
 }
 
-
 #start-date, #end-date {
   color: rgb(19, 19, 24);
   font-style: italic;
 
+}
+
+.chart {
+  width: 45%;
+  height: 45%;
+//   display: inline-flex;
+//   flex-direction: row;
+  justify-content: center;
+//   background-color: yellow;
+  text-align:center;
+//   border: solid 1px red;
+  margin: 5px;
+}
+
+
+
+#all-chart {
+  // width: 45%;
+  display: flex;
+  flex-flow: row wrap ;
+  // flex-direction: row;
+  // justify-content: center;
+  // background-color: yellow;
+  // text-align:center;
+  // border: solid 1px red;
+  // margin: 5px;
+}
+
+#mytable-volume {
+  font-size: 10px;
 }

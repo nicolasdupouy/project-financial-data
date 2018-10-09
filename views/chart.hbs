@@ -3,20 +3,26 @@
 <nav class="udl-desc">
     <select id="udl-selected">
         {{#each uniquelistUdl}}
-            <option value="{{this}}">{{this}}</option>
+        <option value="{{this}}">{{this}}</option>
         {{/each}}
     </select>
     <div id="udl-description"></div>
     {{!-- <input type="range" multiple value="0,100" /> --}}
-<span class="multi-range">
-    <label id="start-date"></label>
-    <input type="range" min="0" max="100" value="5" id="lower">
-    <input type="range" min="0" max="100" value="95" id="upper">
-    <label id="end-date"></label>
-</span>
+    <span class="multi-range">
+        <label id="start-date"></label>
+        <input type="range" min="0" max="100" value="5" id="lower">
+        <input type="range" min="0" max="100" value="95" id="upper">
+        <label id="end-date"></label>
+    </span>
 </nav>
 {{!-- <div></div> --}}
-<div id="myChartPrice" class="chart"></div>
-<div id="myChartTotalVolume" class="chart"></div>
-<div id="myChartADV" class="chart"></div>
-<div id="mytable-volume" class="chart"></div>
+<span id="all-chart">
+    <div id="myChartPrice" class="chart"></div>
+    <div id="myChartTotalVolume" class="chart"></div>
+    <div id="myChartADV" class="chart"></div>
+    <div id="mytable-volume" class="chart"></div>
+    {{!-- <span class="chart"> --}}
+        {{!-- <h2>GLOBAL VOLUME PER YEAR</h2> --}}
+        {{!-- <div id="mytable-volume"></div> --}}
+    {{!-- </span> --}}
+</span>
