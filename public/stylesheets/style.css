@@ -130,7 +130,10 @@ a {
   display: flex;
   flex-flow: row wrap;
   margin: 100px;
-  margin-top: 50px; }
+  margin-top: -40px; 
+  margin-left: 150px;
+
+}
 
 .div-container {
   width: 40%;
@@ -154,5 +157,15 @@ a {
 
 .span-container {
   margin: 20px; }
+
+#logo-finance-nav {
+  width: 120%;
+  margin-left:-40px;
+  height: 150px;
+}
+
+.img-container{
+  margin-top: -10px;
+}
 
 /*# sourceMappingURL=style.css.map */
