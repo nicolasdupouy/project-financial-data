@@ -148,8 +148,16 @@ router.get('/api/calculation-form/:function/udl/:id', (req, res, next) => {
   //   udl = array_script[1]
   // }
   console.log(functioncalc)
-  header += `df['CUMSUM']=df.groupby('Symbol')['Total Volume'].${functioncalc}()\r\n` +
-    `print(df[df['Symbol']=='${udlname}'][['YEARMONTH','CUMSUM']].to_json(orient='values'))`
+  if (functioncalc == "cumsum") {
+    header += `df['CUMSUM']=df.groupby('Symbol')['Total Volume'].${functioncalc}().fillna(0)\r\n` +
+      `print(df[df['Symbol']=='${udlname}'][['YEARMONTH','CUMSUM']].to_json(orient='values'))`
+  } else {
+    header += `dfmva=df.groupby('Symbol')['Total Volume'].${functioncalc}().reset_index().fillna(0)\r\n` +
+    `dfnew1=dfmva[dfmva['Symbol']=='${udlname}']\r\n`+
+    `dfnew2=pd.DataFrame(df[df['Symbol']=='${udlname}']['YEARMONTH']).reset_index().drop("index",axis=1)\r\n`+
+    'dfresult=pd.merge(dfnew1,dfnew2,on=dfnew1.index).drop(["key_0","level_1"],axis=1)[["YEARMONTH","Total Volume"]]\r\n'+
+    'print(dfresult.to_json(orient="values"))'
+  }
   // df['CUMSUM']=df.groupby("Symbol")['Total Volume'].cumsum()#.reset_index()['Total Volume']
   // dfmva=df.groupby('Symbol')['Total Volume'].rolling(3).mean().reset_index().fillna(0)
   // dfstd=df.groupby('Symbol')['Total Volume'].rolling(3).std().reset_index().fillna(0)

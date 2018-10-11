@@ -64,16 +64,20 @@ a {
   text-align: center;
   margin: 5px; }
 
-#all-chart {
+.all-chart {
   display: flex;
   flex-flow: row wrap;
   margin-top: 50px; }
 
-#mytable-volume, #mytable-volume-details {
+#mytable-volume, #mytable-volume-details, #mytable-script {
   font-size: 12px;
-  border: solid 1px #e8dbdb;
   border-radius: 5px;
-  margin: 5px; }
+  margin: 5px;
+  padding: 10px; }
+
+#myChartDonut {
+  margin-left: 300px;
+  font-size: 10px; }
 
 .multi-range {
   margin-right: 0px; }
@@ -87,5 +91,68 @@ thead {
 .active {
   color: red;
   font-weight: bold; }
+
+#script-calc {
+  text-align: center; }
+
+#script-calc label {
+  font-style: italic;
+  font-weight: bold; }
+
+a {
+  color: inherit;
+  text-decoration: none;
+  font-size: 18px; }
+
+.navbar {
+  background-color: #ede1e1;
+  margin-top: -30px;
+  margin-bottom: 50px; }
+
+.navbar-nav {
+  display: inline-flex; }
+
+.nav-item {
+  margin: 20px;
+  list-style-type: none; }
+
+.limit {
+  margin-left: 40px; }
+
+#logo-finance {
+  width: 70px;
+  height: 70px;
+  margin-left: 380px;
+  margin-right: 0;
+  padding: 0; }
+
+.container {
+  display: flex;
+  flex-flow: row wrap;
+  margin: 100px;
+  margin-top: 50px; }
+
+.div-container {
+  width: 40%;
+  margin: 5px;
+  margin-bottom: 40px;
+  margin-right: 40px;
+  padding: 10px;
+  background-color: #e2e6f5;
+  display: flex;
+  flex-flow: column wrap;
+  text-align: center;
+  font-size: 14px;
+  border-radius: 5px;
+  text-align: center; }
+
+.img-source {
+  width: 40%;
+  height: 50%;
+  padding-top: 20px;
+  margin-left: 120px; }
+
+.span-container {
+  margin: 20px; }
 
 /*# sourceMappingURL=style.css.map */

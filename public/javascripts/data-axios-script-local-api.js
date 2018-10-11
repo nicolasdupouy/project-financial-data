@@ -45,7 +45,7 @@ let getMillisectoDate = function (myDate) {
 }
 
 let updateGraphs = function (udl, startDateMillisec, endDateMillisec) {
-	// getGraphPrice(udl, startDateMillisec, endDateMillisec)
+	getGraphPrice(udl, startDateMillisec, endDateMillisec)
 	getGraphTotalVolume(udl, startDateMillisec, endDateMillisec)
 	getGraphADV(udl, startDateMillisec, endDateMillisec)
 }
@@ -206,6 +206,62 @@ let getDataTableVolumeMonth = function (udl) {
 		})
 }
 
+let getGraphDonutVolume = function (udl) {
+	axios.get(`/api/globalview/${udl}`)
+		.then(response => {
+			// var result = _.sortBy(Object.values(response.data), o => o[0])
+			// console.log(result)
+			var result = Object.values(response.data)
+			let lentable = Object.keys(result[0]).length
+			let keystable = Object.keys(result[0]).reverse()
+			let valuestable = Object.values(result[0]).reverse()
+			let volume_array = []
+			let label_array=[]
+			for (i = 0; i < lentable; i++) {
+				if (keystable[i] != "Symbol" & keystable[i] != "_id") {
+					label_array.push(keystable[i])
+					if (keystable[i]=="2014" || keystable[i]=="2017") {
+						volume_array.push(valuestable[i]*12/2);
+					}else {
+						volume_array.push(valuestable[i]);
+					}
+					
+				}
+			}
+			// let sum = volume_array.reduce(function (a, b) { return a + b; });
+			// let avg = sum / volume_array.length;
+			console.log('label_array',label_array)
+			let array_colors=['rgb(177, 127, 38)', 'rgb(205, 152, 36)', 'rgb(99, 79, 37)', 'rgb(129, 180, 179)', 'rgb(124, 103, 37)']
+			var data = [{
+				values: volume_array,
+				labels:label_array,
+				marker: {
+					colors: array_colors
+				},
+				domain: {column: 0},
+				name: 'GLOBAL VOLUME PER YEAR',
+				hoverinfo: 'label+percent',
+				hole: .4,
+				type: 'pie'
+			}];
+
+			var layout = {
+				title: 'VOLUME REPARTITION',
+				font: {color:'rgb(123, 113, 113)', style:"bold", size:"14"},
+				grid: {rows: 1, columns: 1},
+				showlegend: true,
+				annotations: [{font: {size: "12"},showarrow: false,	text: 'VOLUME',x: 0.5,y: 0.5}
+				],
+				height: 400,
+  	width: 500,
+			};
+			
+			Plotly.newPlot('myChartDonut', data, layout);
+
+		})
+}
+
+
 document.getElementById("lower").onchange = function (e) {
 	let startDateMillisec = getMillisectoDate(e.target.value)[0]
 	let startDate = getMillisectoDate(e.target.value)[1]
@@ -239,5 +295,6 @@ document.getElementById("udl-selected").onchange = function (e) {
 	// getGraphADV(udl)
 	getDataTableVolume(udl)
 	getDataTableVolumeMonth(udl)
+	getGraphDonutVolume(udl)
 
 }

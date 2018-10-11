@@ -1,10 +1,17 @@
-<form action="/calculation" method='GET' id="script-calc">
+<h1>PERFORM CALCULATION</h1>
+{{!-- <form action="/calculation" method='GET' id="script-calc"> --}}
+{{!-- <form id="script-calc"> --}}
+<div id="script-calc">
   <label for="script">What do you want to calculate?</label>
-  <input type='textarea' name="scriptpython" id="script" size="80" placeholder="cumsum(UDL),rolling mean(UDL,wind), rolling std(udl,wind), rolling corr (UDL1,UDL2,wind)" width="200px">
+  <input type='textarea' name="scriptpython" id="script" height="40" size="80" placeholder="cumsum UDL,rolling wind mean UDL, rolling wind std UDL, rolling  wind corr UDL1 UDL2)"
+    width="200px">
   {{!-- <textarea id="script"></textarea> --}}
-  <button type="submit" value="submit" id="button-submit"> Submit</button>
-</form>
-<div id="container-json">
+  {{!-- <button type="submit" value="submit" id="button-submit"> Submit</button> --}}
+{{!-- </form> --}}
 </div>
+<div id="container-json"></div>
 
-<script src="javascripts/data-axios-script-python.js" charset="utf-8"></script>
+<span class="all-chart">
+  <div id="mychart-script" class="chart"></div>
+  <div id="mytable-script" class="chart"></div>
+</span>
