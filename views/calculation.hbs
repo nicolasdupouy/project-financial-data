@@ -1,0 +1,10 @@
+<form action="/calculation" method='GET' id="script-calc">
+  <label for="script">What do you want to calculate?</label>
+  <input type='textarea' name="scriptpython" id="script" size="80" placeholder="cumsum(UDL),rolling mean(UDL,wind), rolling std(udl,wind), rolling corr (UDL1,UDL2,wind)" width="200px">
+  {{!-- <textarea id="script"></textarea> --}}
+  <button type="submit" value="submit" id="button-submit"> Submit</button>
+</form>
+<div id="container-json">
+</div>
+
+<script src="javascripts/data-axios-script-python.js" charset="utf-8"></script>

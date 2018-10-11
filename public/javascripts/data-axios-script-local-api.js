@@ -125,25 +125,27 @@ let getDataTableVolume = function (udl) {
 			// var result = _.sortBy(Object.values(response.data), o => o[0])
 			// console.log(result)
 			var result = Object.values(response.data)
-			// console.log('res TotalVolume.totalData', Object.keys(result[0]))
-			// document.getElementById('mytable-volume').innerHTML = Object.keys(result[0])
 			let lentable = Object.keys(result[0]).length
 			let keystable = Object.keys(result[0]).reverse()
 			let valuestable = Object.values(result[0]).reverse()
+			let volume_array = []
+			for (i = 0; i < lentable; i++) {
+				if (keystable[i] != "Symbol" & keystable[i] != "_id") {
+					volume_array.push(valuestable[i]);
+				}
+			}
+			let sum = volume_array.reduce(function (a, b) { return a + b; });
+			let avg = sum / volume_array.length;
 			$("#mytable-volume").html("")
-			// document.getElementById('mytable-volume').innerHTML = "";
 			document.getElementById('mytable-volume').innerHTML += "<h2>GLOBAL VOLUME PER YEAR</h2>"
 			document.getElementById('mytable-volume').innerHTML += "<table id='mytable-vol'></table>"
-			// document.getElementById('mytable-volume').innerHTML += "<thead id='mytable-vol-head'></thead>"
-			// document.getElementById('mytable-volume').innerHTML += "<tbody id='mytable-vol-body'></tbody>"
 			let headertable = "";
 			let bodytable = "";
 			for (i = 0; i < lentable; i++) {
 				if (keystable[i] != "_id") {
-					console.log("Name in Symbol", valuestable[i])
 					headertable += `<th>${keystable[i]}</th>`
 					if (keystable[i] != "Symbol") {
-						if (valuestable[i] > 1000000) {
+						if (valuestable[i] > avg) {
 							bodytable += `<td class="active">${parseFloat(valuestable[i]).toLocaleString(undefined, { minimumFractionDigits: 0 })}</td>`
 						} else {
 							bodytable += `<td>${parseFloat(valuestable[i]).toLocaleString(undefined, { minimumFractionDigits: 0 })}</td>`
@@ -152,14 +154,10 @@ let getDataTableVolume = function (udl) {
 					} else {
 						bodytable += `<td>${valuestable[i]}</td>`
 					}
-
-					// document.getElementById('mytable-vol-body').innerHTML += `<td>${parseFloat(valuestable[i]).toLocaleString(undefined, { minimumFractionDigits: 0 })}</td>`
 				}
 			}
 
 			document.getElementById('mytable-vol').innerHTML += "<thead id='mytable-vol-head'>" + headertable + "</thead><tbody>" + bodytable + "</tbody>"
-			// document.getElementById('mytable-vol-head').innerHTML +=headertable
-			// document.getElementById('mytable-vol-body').innerHTML+=bodytable
 			$('#mytable-vol').DataTable();
 
 		})
@@ -170,9 +168,15 @@ let getDataTableVolumeMonth = function (udl) {
 		.then(response => {
 			// var result = _.sortBy(Object.values(response.data), o => o[0])
 			// console.log(result)
-			var result = Object.values(response.data)
+			let result = Object.values(response.data)
 			let valuestable = Object.values(result[0])
 			let lentable = Object.keys(result[0]).length
+			let volume_array = []
+			for (i = 0; i < lentable; i++) {
+				volume_array.push(valuestable[i][3])
+			}
+			let sum = volume_array.reduce(function (a, b) { return a + b; });
+			let avg = sum / volume_array.length;
 			console.log('values', valuestable)
 			$("#mytable-volume-details").html("")
 			// document.getElementById('mytable-volume').innerHTML = "";
@@ -184,7 +188,7 @@ let getDataTableVolumeMonth = function (udl) {
 			for (i = 0; i < lentable; i++) {
 				for (j = 0; j < 4; j++) {
 					if (j == 3) {
-						if (valuestable[i][j] >= 150000) {
+						if (valuestable[i][j] >= avg) {
 							bodydetails += `<td class="active">${parseFloat(valuestable[i][j]).toLocaleString(undefined, { minimumFractionDigits: 0 })}</td>`
 						} else {
 							bodydetails += `<td>${parseFloat(valuestable[i][j]).toLocaleString(undefined, { minimumFractionDigits: 0 })}</td>`
@@ -228,9 +232,6 @@ document.getElementById("udl-selected").onchange = function (e) {
 
 	let startDateMillisec = getDatetoMillisec("start-date")
 	let endDateMillisec = getDatetoMillisec("end-date")
-	// console.log('endDate en udl-selected',endDate)
-	// console.log(udl)
-	// window.location
 	getDescription(udl)
 	updateGraphs(udl, startDateMillisec, endDateMillisec)
 	// // getGraphPrice(udl)
