@@ -11,6 +11,8 @@ bin/mongod
 
 The datas are in stored in ***/data/db***.
 
+Usefull GUI to see the datas: **MondoDB Compass**.
+
 ## Python (part 2/3)
 Jupyter is install via PIP and stored in /Library/Frameworks/Python.framework/Versions/3.6/bin/jupyter.
 
