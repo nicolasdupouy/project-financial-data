@@ -1,7 +1,7 @@
 # project-financial-data
 
 # Quick setup (basic, local and personnal)
-## MongoDB (part 1/3)
+## MongoDB (part 1/4)
 Start the database.
 
 ```
@@ -13,7 +13,11 @@ The datas are in stored in ***/data/db***.
 
 Usefull GUI to see the datas: **MondoDB Compass**.
 
-## Python (part 2/3)
+## Python 
+### Chrome Driver (part 2/4)
+https://stackoverflow.com/questions/39428042/use-selenium-with-chromedriver-on-mac
+
+### Jupyter Notebook part (3/4)
 Jupyter is install via PIP and stored in /Library/Frameworks/Python.framework/Versions/3.6/bin/jupyter.
 
 ```
@@ -23,7 +27,7 @@ jupyter notebook
 Create the collection. And load datas into. 
 
 
-## Node.js (part 3/3)
+## Node.js (part 4/4)
 ```
 npm install
 npm start
